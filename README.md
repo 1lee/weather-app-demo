@@ -2,6 +2,8 @@
 
 ---
 
+Live deployment: [https://weathertest-wob2krpo4q-uc.a.run.app/]
+
 **Timing**
 
 > I made my initial commit at 6:21p and final commit at 10:42p making it 4hr 20min total which included interruptions of ~20 mins.
