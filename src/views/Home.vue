@@ -7,7 +7,11 @@
 			:temperature="temperature"
 			:description="description"
 			main-text="Welcome to the weather app demo!"
-			><Favorites /> <Search @search="handleSearch($event)"
+			><Favorites
+				:favorite1="favorites[0]"
+				:favorite2="favorites[1]"
+				:favorite3="favorites[2]" />
+			<Search @search="handleSearch($event)"
 		/></Card>
 		<Footer />
 	</main>
@@ -33,7 +37,8 @@
 			return {
 				city: '',
 				temperature: '',
-				description: ''
+				description: '',
+				favorites: []
 			};
 		},
 
@@ -45,18 +50,17 @@
 					let code = data.weathercode[0];
 					this.description = weatherCodes[code];
 				});
-				let favorites = [];
 				if (typeof e === 'string') {
 					this.city = e;
-					console.log('favorites: ', favorites);
+					console.log('favorites: ', this.favorites);
 
-					favorites.push(e);
+					this.favorites.push(e);
 				}
 				console.log(
 					`favorites in localstorage: `,
 					localStorage.getItem('favorites')
 				);
-				localStorage.setItem('favorites', JSON.stringify(favorites));
+				localStorage.setItem('favorites', JSON.stringify(this.favorites));
 			}
 		}
 	};

@@ -16,6 +16,7 @@
 					role="tab"
 					aria-controls="pills-home3"
 					aria-selected="true"
+					@click="search(favorite1)"
 				>
 					{{ favorite1 }}
 				</button>
@@ -30,6 +31,7 @@
 					role="tab"
 					aria-controls="pills-profile3"
 					aria-selected="false"
+					@click="search(favorite2)"
 				>
 					{{ favorite2 }}
 				</button>
@@ -44,6 +46,7 @@
 					role="tab"
 					aria-controls="pills-contact3"
 					aria-selected="false"
+					@click="search(favorite3)"
 				>
 					{{ favorite3 }}
 				</button>
@@ -59,6 +62,13 @@
 			favorite1: String,
 			favorite2: String,
 			favorite3: String
+		},
+		methods: {
+			methods: {
+				search(e) {
+					this.$emit('search', e);
+				}
+			}
 		}
 	};
 </script>
