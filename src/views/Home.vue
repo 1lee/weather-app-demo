@@ -26,7 +26,7 @@
 		mixins: [getWeather],
 		methods: {
 			handleSearch(e) {
-				getWeather();
+				getWeather(e);
 				console.log('searched...', e);
 			}
 		}
