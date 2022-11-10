@@ -7,7 +7,7 @@
 			:temperature="temperature"
 			:description="description"
 			main-text="Welcome to the weather app demo!"
-			><Search @search="handleSearch($event)"
+			><Favorites /> <Search @search="handleSearch($event)"
 		/></Card>
 		<Footer />
 	</main>
@@ -16,6 +16,7 @@
 <script>
 	import Card from '@/components/UI/Card.vue';
 	import Search from '@/components/UI/Search.vue';
+	import Favorites from '@/components/Favorites.vue';
 	import Footer from '@/components/Footer.vue';
 
 	import { getWeather, weatherCodes } from '@/mixins/fetchWeather';
@@ -24,7 +25,8 @@
 		components: {
 			Footer,
 			Card,
-			Search
+			Search,
+			Favorites
 		},
 		mixins: [getWeather, weatherCodes],
 		data() {
@@ -34,6 +36,7 @@
 				description: ''
 			};
 		},
+
 		methods: {
 			handleSearch(e) {
 				getWeather(e).then(data => {
@@ -42,12 +45,18 @@
 					let code = data.weathercode[0];
 					this.description = weatherCodes[code];
 				});
-				console.log(`typeof?? `, typeof e);
+				let favorites = [];
 				if (typeof e === 'string') {
 					this.city = e;
+					console.log('favorites: ', favorites);
+
+					favorites.push(e);
 				}
-				console.log('searched...', e);
-				console.log(weatherCodes);
+				console.log(
+					`favorites in localstorage: `,
+					localStorage.getItem('favorites')
+				);
+				localStorage.setItem('favorites', JSON.stringify(favorites));
 			}
 		}
 	};

@@ -6,9 +6,9 @@
 		<figure>
 			<img :src="imgUrl" alt="weather" style="width: 100%" />
 			<figcaption>
-				<span class="block">{{ city }}</span>
+				<span class="block" v-if="temperature">{{ city }}</span>
 				<span class="block">Temp: {{ temperature }}</span>
-                <span class="description">{{description}}</span>
+				<span class="description">{{ description }}</span>
 			</figcaption>
 		</figure>
 		<div class="px-6 py-4">
@@ -30,8 +30,8 @@
 			title: String,
 			mainText: String,
 			city: { type: String, default: '' },
-            temperature: String,
-            description: String
+			temperature: String,
+			description: String
 		}
 	};
 </script>

@@ -19,7 +19,6 @@ const resolveCoords = city => {
 				lat = data[0].latitude;
 				long = data[0].longitude;
 
-				console.log(`lat: ${lat} / long: ${long}`);
 				res({ lat, long });
 			})
 			.catch(error => {
@@ -76,9 +75,6 @@ export const getWeather = city => {
 						return Promise.reject(error);
 					}
 					let dataSpread = { ...data.hourly };
-
-					// console.log(`data: `, data);
-					console.log(`data.hourly: `, dataSpread);
 
 					res(dataSpread);
 				})
