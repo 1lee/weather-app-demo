@@ -1,35 +1,17 @@
-<h3 align="center">Vue Tailwind</h3>
-<p align="center">A simple starter template for Vue JS + Tailwind</p>
+# Notes
 
-<img src="./src/assets/banner.png" width="100%" alt="">
+---
 
-### About
-This is my project on creating a simple starter template for Vue JS and Tailwind.
+**Timing**
 
-Using the fixed layout concept, it is very suitable for developing web for a special mobile display
+> I made my initial commit at 6:21p and final commit at 10:42p making it 4hr 20min total which included interruptions of ~20 mins.
 
-### Features
-- Vue JS 3
-- Tailwindcss
-- Pinia
-- Vue Router
-- Font Awesome 5
-- Google Font Poppins
-- Fixed layout
-- Script setup
-- Basic of components and props
-- Basic routing
-- Include web manifest and icons
+- I used Vue with Tailwind and cloned the boilerplate from [https://github.com/or-abdillh/vue-tailwind](https://github.com/or-abdillh/vue-tailwind), some of the UI elements were started from templates at [Tailwind Elements](https://tailwind-elements.com/)
 
-### Clone This Repo
-- <code>git clone https://github.com/or-abdillh/vue-tailwind.git </code>
-- <code>cd vue-tailwind</code>
-- <code>npm install</code>
-- <code>npm run dev</code>
+- I chose TailwindCSS for my styles so that I could commit as much time as possible to the logic.
 
-### Demo 
-- [Vue Tailwind](https://vue-tailwind-starter.vercel.app/)
+- My intention was to break up the code in a way that would as closely match my style if I were to code it under normal conditions (i.e. create UI components and pass props through slots, separate logic and data and import via mixins, single purpose components etc)
 
-[Oka R Abdillah ](http://github.com/or-abdillh)
-<br>
-Last edited on : 30/01/2022
+- I initially started to use the Google Maps api to resolve the coordinates against the city name, but my api key started erroring so I used this api instead (API Ninjas)[https://api-ninjas.com/api]
+
+- The finished app returns the city, temperature, and weather code description for the city name entered in the field, as well as pills to display the last 3 searched (favorites). My initial intention was to map images to the weathercodes object so that the pictures would depict the description, and have the favorites initiate a search on click. I also would have made different choices if the Google Maps api was available to me. 
