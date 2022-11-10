@@ -22,8 +22,9 @@
 			Footer,
 			Card,
 			Search
-		},
-		mixins: [getWeather],
+	},
+	mixins: [getWeather],
+		
 		methods: {
 			handleSearch(e) {
 				getWeather(e);
