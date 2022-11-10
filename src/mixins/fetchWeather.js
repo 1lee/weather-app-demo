@@ -60,40 +60,31 @@ export const weatherCodes = {
 	99: 'Thunderstorm with heavy hail'
 };
 
-export const weatherData = {
-	time: '',
-	code: '',
-	temperature: ''
-};
-
 export const getWeather = city => {
-	// var geocoder = new google.maps.Geocoder();
-	// let lat, long;
+	return new Promise(function (res, rej) {
+		resolveCoords(city).then(coords => {
+			fetch(
+				`https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.long}&hourly=temperature_2m,weathercode&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York`
+			)
+				.then(async response => {
+					const data = await response.json();
 
-	resolveCoords(city).then(coords => {
-		fetch(
-			`https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.long}&hourly=temperature_2m,weathercode&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York`
-		)
-			.then(async response => {
-				const data = await response.json();
+					// check for error response
+					if (!response.ok) {
+						// get error message from body or default to response statusText
+						const error = (data && data.message) || response.statusText;
+						return Promise.reject(error);
+					}
+					let dataSpread = { ...data.hourly };
 
-				// check for error response
-				if (!response.ok) {
-					// get error message from body or default to response statusText
-					const error = (data && data.message) || response.statusText;
-					return Promise.reject(error);
-				}
+					// console.log(`data: `, data);
+					console.log(`data.hourly: `, dataSpread);
 
-				console.log(`data: `, data);
-				weatherData.time = data.hourly.time[0];
-				weatherData.code = data.hourly.weatherCode[0];
-				weatherCodes.temperature = data.hourly.temperature_2m[0];
-
-				console.log(`weatherData: `, weatherData);
-			})
-			.catch(error => {
-				this.errorMessage = error;
-				console.error('There was an error!', error);
-			});
+					res(dataSpread);
+				})
+				.catch(error => {
+					console.error('There was an error!', error);
+				});
+		});
 	});
 };

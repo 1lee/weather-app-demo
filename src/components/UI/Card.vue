@@ -3,8 +3,14 @@
 		<h1 class="absolutew-full bg-white font-bold text-xl mb-2 text-center">
 			{{ title }}
 		</h1>
-		<span>Temp: {{ temperature }}</span>
-		<img class="w-full" :src="imgUrl" alt="weather" />
+		<figure>
+			<img :src="imgUrl" alt="weather" style="width: 100%" />
+			<figcaption>
+				<span class="block">{{ city }}</span>
+				<span class="block">Temp: {{ temperature }}</span>
+                <span class="description">{{description}}</span>
+			</figcaption>
+		</figure>
 		<div class="px-6 py-4">
 			<p class="text-gray-700 text-base">
 				{{ mainText }}
@@ -23,7 +29,9 @@
 			imgUrl: String,
 			title: String,
 			mainText: String,
-			temperature: String
+			city: { type: String, default: '' },
+            temperature: String,
+            description: String
 		}
 	};
 </script>

@@ -3,6 +3,9 @@
 		<Card
 			img-url="https://live.staticflickr.com/83/235805526_ebd124b0a8_b.jpg"
 			title="Weather Demo"
+			:city="city"
+			:temperature="temperature"
+			:description="description"
 			main-text="Welcome to the weather app demo!"
 			><Search @search="handleSearch($event)"
 		/></Card>
@@ -15,20 +18,36 @@
 	import Search from '@/components/UI/Search.vue';
 	import Footer from '@/components/Footer.vue';
 
-	import { getWeather } from '@/mixins/fetchWeather';
+	import { getWeather, weatherCodes } from '@/mixins/fetchWeather';
 
 	export default {
 		components: {
 			Footer,
 			Card,
 			Search
-	},
-	mixins: [getWeather],
-		
+		},
+		mixins: [getWeather, weatherCodes],
+		data() {
+			return {
+				city: '',
+				temperature: '',
+				description: ''
+			};
+		},
 		methods: {
 			handleSearch(e) {
-				getWeather(e);
+				getWeather(e).then(data => {
+					console.log('weather: ', data);
+					this.temperature = data.temperature_2m[0];
+					let code = data.weathercode[0];
+					this.description = weatherCodes[code];
+				});
+				console.log(`typeof?? `, typeof e);
+				if (typeof e === 'string') {
+					this.city = e;
+				}
 				console.log('searched...', e);
+				console.log(weatherCodes);
 			}
 		}
 	};
